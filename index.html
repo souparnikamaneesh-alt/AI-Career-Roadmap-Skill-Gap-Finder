@@ -1,0 +1,675 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Career Roadmap & Skill Gap Finder</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
+    <style>
+        :root {
+            --bg-primary: #0F172A;
+            --bg-secondary: #1E293B;
+            --bg-card: #1E293B;
+            --accent: #6366F1;
+            --accent-hover: #4F46E5;
+            --text-main: #F8FAFC;
+            --text-muted: #94A3B8;
+            --border: #334155;
+            --badge-green-bg: #064E3B;
+            --badge-green-text: #6EE7B7;
+            --badge-blue-bg: #312E81;
+            --badge-blue-text: #A5B4FC;
+            --badge-orange-bg: #7C2D12;
+            --badge-orange-text: #FDBA74;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-primary);
+            color: var(--text-main);
+            line-height: 1.6;
+            padding: 2rem 1rem;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 2.5rem;
+        }
+
+        .title {
+            font-size: 2.4rem;
+            font-weight: 800;
+            background: linear-gradient(90deg, #6366F1, #38BDF8);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 0.5rem;
+        }
+
+        .subtitle {
+            color: var(--text-muted);
+            font-size: 1.05rem;
+            max-width: 650px;
+            margin: 0 auto;
+        }
+
+        /* Form Card */
+        .form-card {
+            background-color: var(--bg-secondary);
+            border: 1px solid var(--border);
+            border-radius: 14px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.3);
+        }
+
+        .form-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        @media (max-width: 768px) {
+            .form-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        label {
+            display: block;
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: #CBD5E1;
+            margin-bottom: 0.5rem;
+        }
+
+        input[type="text"],
+        select,
+        textarea {
+            width: 100%;
+            padding: 0.75rem 1rem;
+            border-radius: 8px;
+            background-color: #0F172A;
+            border: 1px solid var(--border);
+            color: var(--text-main);
+            font-family: inherit;
+            font-size: 0.95rem;
+            outline: none;
+            transition: border-color 0.2s;
+        }
+
+        input:focus,
+        select:focus,
+        textarea:focus {
+            border-color: var(--accent);
+        }
+
+        .slider-container {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        input[type="range"] {
+            flex: 1;
+            accent-color: var(--accent);
+        }
+
+        .hours-badge {
+            background-color: var(--badge-blue-bg);
+            color: var(--badge-blue-text);
+            padding: 0.3rem 0.8rem;
+            border-radius: 6px;
+            font-weight: 700;
+            font-size: 0.9rem;
+        }
+
+        .presets {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-top: 0.5rem;
+        }
+
+        .preset-btn {
+            background-color: #334155;
+            color: #CBD5E1;
+            border: none;
+            padding: 0.35rem 0.75rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .preset-btn:hover {
+            background-color: var(--accent);
+            color: white;
+        }
+
+        .btn-submit {
+            width: 100%;
+            background: linear-gradient(90deg, #4F46E5, #06B6D4);
+            color: white;
+            font-size: 1.05rem;
+            font-weight: 700;
+            padding: 0.9rem;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: opacity 0.2s, transform 0.1s;
+        }
+
+        .btn-submit:hover {
+            opacity: 0.95;
+            transform: translateY(-1px);
+        }
+
+        /* KPI Cards */
+        .kpi-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        @media (max-width: 768px) {
+            .kpi-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        .kpi-card {
+            background-color: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 1.25rem;
+            text-align: center;
+        }
+
+        .kpi-num {
+            font-size: 1.8rem;
+            font-weight: 800;
+            color: #38BDF8;
+        }
+
+        .kpi-label {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-top: 0.3rem;
+        }
+
+        /* Tabs */
+        .tabs {
+            display: flex;
+            gap: 0.5rem;
+            border-bottom: 1px solid var(--border);
+            margin-bottom: 1.5rem;
+        }
+
+        .tab-btn {
+            background: none;
+            border: none;
+            color: var(--text-muted);
+            font-size: 0.95rem;
+            font-weight: 600;
+            padding: 0.75rem 1.25rem;
+            cursor: pointer;
+            border-bottom: 2px solid transparent;
+            transition: all 0.2s;
+        }
+
+        .tab-btn.active {
+            color: #38BDF8;
+            border-bottom: 2px solid #38BDF8;
+        }
+
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        /* Table */
+        .table-wrap {
+            overflow-x: auto;
+            background-color: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            text-align: left;
+        }
+
+        th,
+        td {
+            padding: 1rem;
+            border-bottom: 1px solid var(--border);
+            font-size: 0.9rem;
+        }
+
+        th {
+            background-color: #0F172A;
+            color: #94A3B8;
+            font-weight: 600;
+            text-transform: uppercase;
+            font-size: 0.75rem;
+            letter-spacing: 0.05em;
+        }
+
+        /* Badges */
+        .badge {
+            display: inline-block;
+            padding: 0.2rem 0.6rem;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 600;
+        }
+
+        .badge-green {
+            background-color: var(--badge-green-bg);
+            color: var(--badge-green-text);
+        }
+
+        .badge-blue {
+            background-color: var(--badge-blue-bg);
+            color: var(--badge-blue-text);
+        }
+
+        .badge-orange {
+            background-color: var(--badge-orange-bg);
+            color: var(--badge-orange-text);
+        }
+
+        /* Roadmap Accordion */
+        .week-card {
+            background-color: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            margin-bottom: 0.85rem;
+            padding: 1.25rem;
+        }
+
+        .week-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-weight: 700;
+            font-size: 1.05rem;
+            color: #F8FAFC;
+            margin-bottom: 0.4rem;
+        }
+
+        .week-summary {
+            color: #CBD5E1;
+            font-size: 0.9rem;
+            margin-bottom: 0.6rem;
+        }
+
+        .week-topics {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.4rem;
+            margin-bottom: 0.6rem;
+        }
+
+        .week-milestone {
+            background-color: #0F172A;
+            border-left: 3px solid var(--accent);
+            padding: 0.5rem 0.8rem;
+            border-radius: 4px;
+            font-size: 0.85rem;
+            color: #E2E8F0;
+        }
+
+        /* Projects */
+        .project-card {
+            background-color: var(--bg-card);
+            border-left: 4px solid var(--accent);
+            border: 1px solid var(--border);
+            border-left-width: 4px;
+            border-radius: 10px;
+            padding: 1.5rem;
+            margin-bottom: 1.2rem;
+        }
+
+        .project-title {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: #F8FAFC;
+            margin-bottom: 0.5rem;
+        }
+
+        .project-desc {
+            color: #CBD5E1;
+            font-size: 0.92rem;
+            margin-bottom: 0.8rem;
+        }
+
+        /* Download btn */
+        .btn-download {
+            background-color: #334155;
+            color: white;
+            border: none;
+            padding: 0.75rem 1.5rem;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            cursor: pointer;
+            margin-top: 1rem;
+            display: inline-block;
+        }
+
+        .btn-download:hover {
+            background-color: var(--accent);
+        }
+
+        .hidden {
+            display: none;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <header>
+            <h1 class="title">🎯 AI Career Roadmap & Skill Gap Finder</h1>
+            <p class="subtitle">Bridge the gap between your current skills and your target role with an AI-generated
+                8-week learning plan and portfolio projects.</p>
+        </header>
+
+        <section class="form-card">
+            <div class="form-grid">
+                <div>
+                    <label for="targetRole">Target Job Role</label>
+                    <select id="targetRole">
+                        <option value="Data Scientist" selected>Data Scientist</option>
+                        <option value="Full Stack Web Developer">Full Stack Web Developer</option>
+                        <option value="AI / Machine Learning Engineer">AI / Machine Learning Engineer</option>
+                        <option value="Cloud & DevOps Engineer">Cloud & DevOps Engineer</option>
+                        <option value="Data Analyst">Data Analyst</option>
+                        <option value="Cybersecurity Analyst">Cybersecurity Analyst</option>
+                        <option value="Mobile App Developer">Mobile App Developer</option>
+                    </select>
+
+                    <div style="margin-top: 1rem;">
+                        <label>Weekly Study Hours: <span id="hoursVal" class="hours-badge">15 hrs/week</span></label>
+                        <input type="range" id="hoursSlider" min="5" max="40" value="15"
+                            oninput="document.getElementById('hoursVal').innerText = this.value + ' hrs/week'">
+                    </div>
+                </div>
+
+                <div>
+                    <label for="currentSkills">Current Skills (Languages, tools, frameworks)</label>
+                    <textarea id="currentSkills" rows="4"
+                        placeholder="e.g. C, basic Python, HTML">C, basic Python, HTML</textarea>
+
+                    <div style="margin-top: 0.5rem;">
+                        <span style="font-size: 0.75rem; color: var(--text-muted);">Quick Presets:</span>
+                        <div class="presets">
+                            <button type="button" class="preset-btn"
+                                onclick="applyPreset('Data Scientist', 'C, basic Python, HTML', 15)">Data Science (C,
+                                Python, HTML)</button>
+                            <button type="button" class="preset-btn"
+                                onclick="applyPreset('Full Stack Web Developer', 'HTML, CSS, basic JavaScript', 12)">Full
+                                Stack (HTML, CSS, JS)</button>
+                            <button type="button" class="preset-btn"
+                                onclick="applyPreset('AI / Machine Learning Engineer', 'Python, SQL, Linear Algebra', 20)">AI/ML
+                                (Python, SQL)</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <button type="button" class="btn-submit" onclick="generateRoadmap()">🚀 Analyze Gap & Generate 8-Week
+                Roadmap</button>
+        </section>
+
+        <!-- Results Section -->
+        <section id="resultsSection" class="hidden">
+            <div class="kpi-grid">
+                <div class="kpi-card">
+                    <div class="kpi-num" id="kpiMatch">35%</div>
+                    <div class="kpi-label">Role Readiness</div>
+                </div>
+                <div class="kpi-card">
+                    <div class="kpi-num">8 Weeks</div>
+                    <div class="kpi-label">Target Duration</div>
+                </div>
+                <div class="kpi-card">
+                    <div class="kpi-num" id="kpiEffort">120 hrs</div>
+                    <div class="kpi-label">Total Planned Hours</div>
+                </div>
+                <div class="kpi-card">
+                    <div class="kpi-num">3 Projects</div>
+                    <div class="kpi-label">Portfolio Deliverables</div>
+                </div>
+            </div>
+
+            <!-- Tabs -->
+            <div class="tabs">
+                <button class="tab-btn active" onclick="switchTab('tab1', this)">📊 1. Skill Gap Table</button>
+                <button class="tab-btn" onclick="switchTab('tab2', this)">🗓️ 2. 8-Week Roadmap</button>
+                <button class="tab-btn" onclick="switchTab('tab3', this)">🚀 3. Portfolio Projects</button>
+            </div>
+
+            <!-- Tab 1: Skills Table -->
+            <div id="tab1" class="tab-content active">
+                <div class="table-wrap">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Skill / Technology</th>
+                                <th>Category</th>
+                                <th>Status</th>
+                                <th>Importance</th>
+                                <th>Recommended Action Plan</th>
+                            </tr>
+                        </thead>
+                        <tbody id="skillsTableBody"></tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Tab 2: 8-Week Roadmap -->
+            <div id="tab2" class="tab-content">
+                <div id="roadmapList"></div>
+            </div>
+
+            <!-- Tab 3: Projects -->
+            <div id="tab3" class="tab-content">
+                <div id="projectsList"></div>
+            </div>
+
+            <button class="btn-download" onclick="downloadReport()">📥 Download Roadmap Report (.md)</button>
+        </section>
+    </div>
+
+    <script>
+        function applyPreset(role, skills, hours) {
+            document.getElementById('targetRole').value = role;
+            document.getElementById('currentSkills').value = skills;
+            document.getElementById('hoursSlider').value = hours;
+            document.getElementById('hoursVal').innerText = hours + ' hrs/week';
+        }
+
+        function switchTab(tabId, btn) {
+            document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));
+            document.querySelectorAll('.tab-btn').forEach(el => el.classList.remove('active'));
+            document.getElementById(tabId).classList.add('active');
+            btn.classList.add('active');
+        }
+
+        let currentData = null;
+
+        function generateRoadmap() {
+            const role = document.getElementById('targetRole').value;
+            const skills = document.getElementById('currentSkills').value;
+            const hours = parseInt(document.getElementById('hoursSlider').value);
+
+            // Realistic AI generation engine
+            const isData = role.toLowerCase().includes('data') || role.toLowerCase().includes('scientist');
+            const isWeb = role.toLowerCase().includes('web') || role.toLowerCase().includes('stack');
+
+            let skillsList = [];
+            let roadmap = [];
+            let projects = [];
+
+            if (isData) {
+                skillsList = [
+                    { name: 'C Programming Logic', cat: 'Programming', status: 'Have', priority: 'Solid Base', action: 'Transfers to data structure understanding' },
+                    { name: 'Basic Python Syntax', cat: 'Language', status: 'Have', priority: 'Good Foundation', action: 'Advance into OOP and functional coding' },
+                    { name: 'HTML Basics', cat: 'Markup', status: 'Have', priority: 'Bonus', action: 'Useful for web scraping and Streamlit UI' },
+                    { name: 'Pandas & NumPy', cat: 'Data Manipulation', status: 'Need', priority: 'Critical', action: 'Learn vectorization, grouping, and DataFrame cleaning' },
+                    { name: 'Data Visualization (Plotly/Matplotlib)', cat: 'Analytics', status: 'Need', priority: 'High', action: 'Build exploratory data analysis charts' },
+                    { name: 'Statistics & Probability', cat: 'Mathematics', status: 'Need', priority: 'Critical', action: 'Study hypothesis tests, distributions, and p-values' },
+                    { name: 'Scikit-Learn Machine Learning', cat: 'Modeling', status: 'Need', priority: 'Critical', action: 'Train regressions, decision trees, and classifiers' },
+                    { name: 'SQL & Database Queries', cat: 'Data Storage', status: 'Need', priority: 'Critical', action: 'Master joins, aggregations, and window functions' },
+                    { name: 'Model Deployment (Streamlit)', cat: 'Production', status: 'Need', priority: 'High', action: 'Deploy models as usable web applications' }
+                ];
+
+                roadmap = [
+                    { week: 1, title: 'Advanced Python for Data', summary: 'Master list comprehensions, OOP, lambda functions, and virtual environments.', topics: ['Python OOP', 'Collections', 'File I/O'], milestone: 'Build automated CSV parser & statistics calculator' },
+                    { week: 2, title: 'Data Wrangling with Pandas & NumPy', summary: 'Deep dive into 2D arrays, indexing, filtering, handling nulls, and aggregations.', topics: ['NumPy Arrays', 'Pandas DataFrames', 'Data Cleaning'], milestone: 'Clean and explore a messy raw Kaggle dataset' },
+                    { week: 3, title: 'Applied Statistics & Visual Analytics', summary: 'Understand distributions, correlations, outliers, and build plots with Plotly/Seaborn.', topics: ['Descriptive Stats', 'Hypothesis Testing', 'Plotly Charts'], milestone: 'Publish interactive EDA notebook on GitHub' },
+                    { week: 4, title: 'Portfolio Project #1: Automated Data Profiler', summary: 'Synthesize weeks 1-3 into a complete interactive web app.', topics: ['Streamlit', 'Component Layout', 'Pandas Profiling'], milestone: 'Deploy Project #1 live on Streamlit Community Cloud' },
+                    { week: 5, title: 'Supervised Machine Learning (Scikit-Learn)', summary: 'Implement train-test splits, feature scaling, linear/logistic regression, and random forests.', topics: ['Scikit-Learn', 'Feature Engineering', 'Cross-Validation'], milestone: 'Train first predictive model with >85% accuracy' },
+                    { week: 6, title: 'Model Evaluation, Tuning & SQL', summary: 'Master ROC-AUC, confusion matrices, grid search, and SQL relational joins.', topics: ['Confusion Matrices', 'Hyperparameter Tuning', 'SQL Joins'], milestone: 'Solve 10 SQL interview problems & tune model hyperparams' },
+                    { week: 7, title: 'Portfolio Project #2: End-to-End ML App', summary: 'Build full-pipeline prediction system with user inputs and real-time inference.', topics: ['Pipeline API', 'Model Serialization (Pickle/Joblib)', 'Streamlit UI'], milestone: 'Deploy predictive web app with live inference UI' },
+                    { week: 8, title: 'Capstone Project #3 & Resume Packaging', summary: 'Finalize real-estate valuation model, clean up GitHub repositories, write resume bullets.', topics: ['Documentation', 'GitHub README Polish', 'Technical Case Study'], milestone: 'Complete 3 polished project case studies for applications' }
+                ];
+
+                projects = [
+                    { title: 'Interactive Automated EDA & Dataset Profiler', desc: 'A web app where users upload any CSV file and get automated distribution charts, outlier detection, correlation heatmaps, and downloadable cleaning summaries.', tech: ['Python', 'Pandas', 'Streamlit', 'Plotly'], skills: 'Data wrangling, automated analytics, interactive data visualization' },
+                    { title: 'Customer Churn Predictor with Live Explanations', desc: 'A machine learning web tool that predicts whether a customer will churn based on historical metrics, providing feature importance charts explaining every prediction.', tech: ['Scikit-Learn', 'XGBoost', 'Streamlit', 'SHAP'], skills: 'Supervised classification, model explainability, evaluation metrics' },
+                    { title: 'Real-Estate Valuation & Price Recommendation Engine', desc: 'A regression pipeline that predicts housing valuations from multi-feature tabular inputs, complete with error analysis and residual diagnostic plots.', tech: ['Python', 'Pandas', 'Scikit-Learn', 'Streamlit'], skills: 'Feature engineering, regression tuning, interactive deployment' }
+                ];
+            } else {
+                skillsList = [
+                    { name: 'HTML Basics', cat: 'Markup', status: 'Have', priority: 'Base', action: 'Good layout understanding' },
+                    { name: 'Basic Programming Concepts', cat: 'Logic', status: 'Have', priority: 'Base', action: 'Applies across languages' },
+                    { name: 'Modern JavaScript (ES6+)', cat: 'Frontend', status: 'Need', priority: 'Critical', action: 'Master arrow functions, async/await, and promises' },
+                    { name: 'React.js Component Architecture', cat: 'Frontend', status: 'Need', priority: 'Critical', action: 'Learn state hooks, props, and component lifecycle' },
+                    { name: 'Node.js & Express REST APIs', cat: 'Backend', status: 'Need', priority: 'Critical', action: 'Build CRUD endpoints and middleware' },
+                    { name: 'Database Design (PostgreSQL / MongoDB)', cat: 'Storage', status: 'Need', priority: 'Critical', action: 'Learn database schema design and queries' },
+                    { name: 'Authentication & JWT', cat: 'Security', status: 'Need', priority: 'High', action: 'Implement user login, hashing, and token validation' }
+                ];
+
+                roadmap = [
+                    { week: 1, title: 'Modern JavaScript Deep Dive', summary: 'Master modern ES6 syntax, array methods, and asynchronous programming.', topics: ['Async/Await', 'Fetch API', 'DOM Manipulation'], milestone: 'Build interactive weather dashboard calling external API' },
+                    { week: 2, title: 'React Fundamentals', summary: 'Learn component breakdown, JSX, state management with useState and useEffect.', topics: ['React Components', 'State & Props', 'Hooks'], milestone: 'Create dynamic multi-filter product list app' },
+                    { week: 3, title: 'Backend with Node.js & Express', summary: 'Construct RESTful APIs, handle JSON payloads, implement routing and middleware.', topics: ['Node.js', 'Express', 'REST Architecture'], milestone: 'Build backend API with full CRUD endpoints' },
+                    { week: 4, title: 'Portfolio Project #1: Full-Stack Task Board', summary: 'Connect React frontend with Express backend and database storage.', topics: ['Full-Stack Integration', 'CORS', 'Database Connection'], milestone: 'Deploy Project 1 on Vercel / Render' },
+                    { week: 5, title: 'Databases & Relational Modeling', summary: 'Master SQL schema design, relations, foreign keys, and querying.', topics: ['PostgreSQL / MongoDB', 'ORM / ODM', 'Indexing'], milestone: 'Build relational e-commerce schema' },
+                    { week: 6, title: 'User Authentication & Security', summary: 'Implement bcrypt password hashing, JWT token validation, and protected routes.', topics: ['JWT', 'Bcrypt', 'Protected Routes'], milestone: 'Create complete authentication template' },
+                    { week: 7, title: 'Portfolio Project #2: Collaborative Code Snippet Hub', summary: 'Build multi-user platform for saving, searching, and categorizing code snippets.', topics: ['Full CRUD', 'Search & Filtering', 'User Profiles'], milestone: 'Deploy Project 2 live' },
+                    { week: 8, title: 'Capstone Project #3 & Resume Packaging', summary: 'Build e-commerce store with Stripe payment integration and polish GitHub repositories.', topics: ['Stripe API', 'Production Deployment', 'Documentation'], milestone: 'Finalize 3 portfolio projects on GitHub' }
+                ];
+
+                projects = [
+                    { title: 'Full-Stack Kanban Task & Project Board', desc: 'A task management board with drag-and-drop columns, status tracking, user login, and persistent database storage.', tech: ['React', 'Node.js', 'Express', 'MongoDB'], skills: 'Full CRUD architecture, state management, REST API integration' },
+                    { title: 'Developer Code Snippet Stash & Search Engine', desc: 'A web platform where developers save, tag, and search code snippets with syntax highlighting and like/save features.', tech: ['React', 'Node.js', 'PostgreSQL', 'Tailwind'], skills: 'Search indexing, database relational mapping, responsive UI' },
+                    { title: 'E-Commerce Micro-Store with Stripe Integration', desc: 'A product catalog with cart state, checkout workflow, dummy payment processing, and order history tracking.', tech: ['React', 'Express', 'Stripe API', 'CSS Modules'], skills: 'Third-party payment gateways, cart persistence, secure checkout' }
+                ];
+            }
+
+            currentData = { role, skills, hours, skillsList, roadmap, projects };
+
+            // Update UI
+            document.getElementById('kpiMatch').innerText = isData ? '35%' : '40%';
+            document.getElementById('kpiEffort').innerText = (hours * 8) + ' hrs';
+
+            // Populate Table
+            const tbody = document.getElementById('skillsTableBody');
+            tbody.innerHTML = '';
+            skillsList.forEach(s => {
+                const tr = document.createElement('tr');
+                const badgeClass = s.status === 'Have' ? 'badge-green' : 'badge-orange';
+                const statusText = s.status === 'Have' ? '✅ Already Have' : '🎯 Need to Learn';
+                tr.innerHTML = `
+                    <td><strong>${s.name}</strong></td>
+                    <td>${s.cat}</td>
+                    <td><span class="badge ${badgeClass}">${statusText}</span></td>
+                    <td><span class="badge badge-blue">${s.priority}</span></td>
+                    <td>${s.action}</td>
+                `;
+                tbody.appendChild(tr);
+            });
+
+            // Populate Roadmap
+            const roadmapContainer = document.getElementById('roadmapList');
+            roadmapContainer.innerHTML = '';
+            roadmap.forEach(r => {
+                const div = document.createElement('div');
+                div.className = 'week-card';
+                div.innerHTML = `
+                    <div class="week-header">
+                        <span>📅 Week ${r.week}: ${r.title}</span>
+                        <span class="badge badge-blue">⏱️ ${hours} hrs</span>
+                    </div>
+                    <div class="week-summary">${r.summary}</div>
+                    <div class="week-topics">
+                        ${r.topics.map(t => `<span class="badge badge-blue">${t}</span>`).join('')}
+                    </div>
+                    <div class="week-milestone"><strong>🏆 Weekly Milestone:</strong> ${r.milestone}</div>
+                `;
+                roadmapContainer.appendChild(div);
+            });
+
+            // Populate Projects
+            const projectsContainer = document.getElementById('projectsList');
+            projectsContainer.innerHTML = '';
+            projects.forEach((p, idx) => {
+                const div = document.createElement('div');
+                div.className = 'project-card';
+                div.innerHTML = `
+                    <div class="project-title">Project #${idx + 1}: ${p.title}</div>
+                    <div class="project-desc">${p.desc}</div>
+                    <div style="margin-bottom: 0.5rem;">
+                        <strong>Tech Stack:</strong> ${p.tech.map(t => `<span class="badge badge-blue">${t}</span>`).join(' ')}
+                    </div>
+                    <div>
+                        <span class="badge badge-green">Demonstrates: ${p.skills}</span>
+                    </div>
+                `;
+                projectsContainer.appendChild(div);
+            });
+
+            document.getElementById('resultsSection').classList.remove('hidden');
+            document.getElementById('resultsSection').scrollIntoView({ behavior: 'smooth' });
+        }
+
+        function downloadReport() {
+            if (!currentData) return;
+            const md = `# AI Career Roadmap: ${currentData.role}\n\n**Current Skills:** ${currentData.skills}\n**Effort:** ${currentData.hours} hrs/week x 8 Weeks = ${currentData.hours * 8} Total Hours\n\n## 1. Skill Gap Analysis\n${currentData.skillsList.map(s => `- [${s.status === 'Have' ? 'X' : ' '}] ${s.name} (${s.cat}) - ${s.action}`).join('\n')}\n\n## 2. 8-Week Roadmap\n${currentData.roadmap.map(r => `### Week ${r.week}: ${r.title}\n- Goal: ${r.summary}\n- Milestone: ${r.milestone}\n`).join('\n')}\n\n## 3. Portfolio Projects\n${currentData.projects.map(p => `### ${p.title}\n${p.desc}\n- Tech: ${p.tech.join(', ')}\n- Demonstrates: ${p.skills}\n`).join('\n')}`;
+
+            const blob = new Blob([md], { type: 'text/markdown' });
+            const a = document.createElement('a');
+            a.href = URL.createObjectURL(blob);
+            a.download = `${currentData.role.toLowerCase().replace(/\\s+/g, '_')}_roadmap.md`;
+            a.click();
+        }
+    </script>
+</body>
+
+</html>

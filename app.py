@@ -5,9 +5,17 @@ A simple, powerful Streamlit web app powered by Google Gemini API.
 
 import json
 import os
+import sys
 import streamlit as st
+import streamlit.runtime
 import pandas as pd
 from dotenv import load_dotenv
+
+# Auto-launch with Streamlit if executed directly via `python app.py`
+if __name__ == "__main__" and not streamlit.runtime.exists():
+    from streamlit.web import cli as stcli
+    sys.argv = ["streamlit", "run", sys.argv[0]]
+    sys.exit(stcli.main())
 
 # Load local environment variables if available
 load_dotenv()
